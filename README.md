@@ -16,4 +16,4 @@ npm run package-win
 npm run package-linux
 ```
 
-### All packcages are placed inside `release-builds` folder
+### All builds are placed inside `./release-builds` folder
