@@ -1,5 +1,4 @@
 import { app, BrowserWindow } from 'electron';
-import * as path from 'path';
 import * as url from 'url';
 
 import { Cookies } from './cookies';
@@ -14,14 +13,15 @@ const store = new Store({
   defaults: {
     // 800x600 is the default size of our window
     windowBounds: { width: 800, height: 600 },
-    cookies: []
-  }
+    cookies: [],
+  },
+  encrypt: true,
 });
 
 function createWindow() {
   // notification = new NotificationService();
   // First we'll get our height and width. This will be the defaults if there wasn't anything saved
-  let { width, height } = store.get('windowBounds');
+  const { width, height } = store.get('windowBounds');
 
   // Pass those values in to the BrowserWindow options
   mainWindow = new BrowserWindow({ width, height });
@@ -52,8 +52,7 @@ function createWindow() {
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
     mainWindow = null;
-
-    cookies.get().then(c => store.set('cookies', c));
+    cookies.get().then((c) => store.set('cookies', c));
   });
 
   // The BrowserWindow class extends the node.js core EventEmitter class, so we use that API
@@ -61,7 +60,7 @@ function createWindow() {
   mainWindow.on('resize', () => {
     // The event doesn't pass us the window size, so we call the `getBounds` method which returns an object with
     // the height, width, and x and y coordinates.
-    let { width, height } = mainWindow.getBounds();
+    const { width, height } = mainWindow.getBounds();
     // Now that we have them, save them using the `set` method.
     store.set('windowBounds', { width, height });
   });
