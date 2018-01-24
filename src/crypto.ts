@@ -18,11 +18,9 @@ export default class Crypto {
     }
 
     encrypt(plainText: string): string {
-        const text = (typeof plainText !== 'string') ? JSON.stringify(plainText) : plainText;
-
         return this
             .cipher
-            .update(text, Crypto.INPUT_ENCODING, Crypto.OUTPUT_ENCODING) + this.cipher.final(Crypto.OUTPUT_ENCODING);
+            .update(plainText, Crypto.INPUT_ENCODING, Crypto.OUTPUT_ENCODING) + this.cipher.final(Crypto.OUTPUT_ENCODING);
     }
 
     decrypt(encryptedText: string): string {
